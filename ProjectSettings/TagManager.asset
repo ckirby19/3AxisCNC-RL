@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CNCMovingParts
+  - Goal
   layers:
   - Default
   - TransparentFX
