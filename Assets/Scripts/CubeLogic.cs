@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -19,15 +20,16 @@ public class CubeLogic : MonoBehaviour
     private float cubeLengthX = 0.025f;
     private float cubeLengthY = 0.025f;
     private float cubeLengthZ = 0.025f;
+    private GameObject yMotionStage;
 
 	private void Start()
 	{
         isInContact = false;
-        var yMotionStage = GameObject.Find("YMotionStage");
+        yMotionStage = GameObject.Find("YMotion");
 		yMotionStageX = yMotionStage.transform.position.x;
 		yMotionStageY = yMotionStage.transform.position.y;
         yMotionStageZ = yMotionStage.transform.position.z;
-        ResetCube();
+        //ResetCube();
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -38,21 +40,36 @@ public class CubeLogic : MonoBehaviour
             ResetCube();
         }
 	}
-    private void ResetCube()
+
+	private void OnCollisionStay(Collision collision)
+	{
+		if (collision.gameObject.tag == "Goal")
+		{
+			isInContact = true;
+			ResetCube();
+		}
+	}
+	private void ResetCube()
     {
-        // Set the XY position to random position across the stage
-        var adjustPosition = new Vector3(
+        Debug.Log("Cube hit target");
+		// Set the XY position to random position across the stage
+		isInContact = false;
+
+		yMotionStageX = yMotionStage.transform.localPosition.x;
+		yMotionStageY = yMotionStage.transform.localPosition.y;
+		yMotionStageZ = yMotionStage.transform.localPosition.z;
+
+		var adjustPosition = new Vector3(
             UnityEngine.Random.Range(-yMotionStageLengthX/2 + cubeLengthX, yMotionStageLengthX/2 - cubeLengthX),
 			cubeLengthZ / 2 + 0.0005f,
 			UnityEngine.Random.Range(-yMotionStageLengthY/2 + cubeLengthY, yMotionStageLengthY/2 - cubeLengthY)
             );
-        
         var yMotionStageCentre = new Vector3(
             yMotionStageX,
             yMotionStageY,
             yMotionStageZ
             );
 
-        this.transform.position = yMotionStageCentre; 
+        this.transform.position = yMotionStageCentre + adjustPosition; 
     }
 }
