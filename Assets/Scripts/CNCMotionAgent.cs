@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -41,42 +42,66 @@ public class CNCMotionAgent : Agent
 	private float motorMaxVoltage = 12; //V
 
 	// The "agent" in this case has multiple rigid bodies associated with it
-	private GameObject xGameObject;
-	private GameObject yGameObject;
-	private GameObject zGameObject;
-	private GameObject contactStickGameObject;
+	private Transform xTransform;
+	private Transform yTransform;
+	private Transform zTransform;
+	private Transform contactStickTransform;
 	private Rigidbody xRigidBody;
 	private Rigidbody yRigidBody;
 	private Rigidbody zRigidBody;
 	private Rigidbody contactStickRigidBody;
 
 	private bool frozen = false;
+	private Transform Cube;
+	private CubeLogic cubeLogic;
 
 	private System.Random random = new System.Random();
 
-	/// <summary>
-	/// Amount of times agent pushed block off of stage
-	/// </summary>
-	public int TimesBlockedPushedOff { get; private set; }
+	private void Start()
+	{
+		contactStickTransform = this.transform.Find("Test Stick/Test_Stick");
+		xTransform = this.transform.Find("XMotionStage/XMotion");
+		yTransform = this.transform.Find("YMotionStage/YMotion");
+		zTransform = this.transform.Find("ZMotionStage/ZMotion");
 
+		xRigidBody = xTransform.GetComponent<Rigidbody>();
+		yRigidBody = yTransform.GetComponent<Rigidbody>();
+		zRigidBody = zTransform.GetComponent<Rigidbody>();
+		contactStickRigidBody = contactStickTransform.GetComponent<Rigidbody>();
+
+		Cube = this.transform.parent.Find("Test Cube/Test_Cube");
+		cubeLogic = Cube.GetComponent<CubeLogic>();
+
+		GameEvents.current.OnCubeContactWithGoal += CubeHitGoal;
+
+	}
 	public override void Initialize()
 	{
-		contactStickGameObject = GameObject.Find("Test_Stick");
-		xGameObject = GameObject.Find("XMotion");
-		yGameObject = GameObject.Find("YMotion");
-		zGameObject = GameObject.Find("ZMotion");
-
-        xRigidBody = xGameObject.GetComponent<Rigidbody>();
-		yRigidBody = yGameObject.GetComponent<Rigidbody>();
-		zRigidBody = zGameObject.GetComponent<Rigidbody>();
-		contactStickRigidBody = contactStickGameObject.GetComponent<Rigidbody>();
 	}
 
-	public override void OnEpisodeBegin()
+	// Reward logic
+	// On entering contact with cube?
+	// On knocking cube off the stage
+	private void OnTriggerEnter(Collider other)
 	{
 		if (trainingMode)
 		{
-
+			if (other.tag == "Cube")
+			{
+				AddReward(0.01f);
+			}
+			else if (other.tag == "AreasToAvoid")
+			{
+				AddReward(-0.1f);
+			}
+		}
+	}
+	
+	private void CubeHitGoal()
+	{
+		if (trainingMode)
+		{
+			AddReward(1f);
 		}
 	}
 
@@ -91,12 +116,9 @@ public class CNCMotionAgent : Agent
 	/// <param name="actions"></param>
 	public override void OnActionReceived(ActionBuffers actions)
 	{
-		if (frozen) return; // Used only after training
-
 		xRigidBody.AddForce(Vector3.right * actions.ContinuousActions[0] * moveForce);
 		yRigidBody.AddForce(Vector3.forward * actions.ContinuousActions[1] * moveForce);
 		zRigidBody.AddForce(Vector3.up * actions.ContinuousActions[2] * moveForce);
-
 	}
 
 	/// <summary>

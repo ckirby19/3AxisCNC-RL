@@ -1,0 +1,29 @@
+{
+    "CNC_Cube_Pushing_Behaviour": {
+        "checkpoints": [
+            {
+                "steps": 24704,
+                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-24704.onnx",
+                "reward": null,
+                "creation_time": 1702845537.780415,
+                "auxillary_file_paths": [
+                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-24704.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 24704,
+            "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour.onnx",
+            "reward": null,
+            "creation_time": 1702845537.780415,
+            "auxillary_file_paths": [
+                "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-24704.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

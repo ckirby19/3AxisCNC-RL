@@ -6,11 +6,13 @@ TagManager:
   tags:
   - CNCMovingParts
   - Goal
+  - Cube
+  - AreasToAvoid
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CubeAndY
   - Water
   - UI
   - 

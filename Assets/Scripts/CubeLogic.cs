@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Dynamic;
 using UnityEngine;
 
 public class CubeLogic : MonoBehaviour
@@ -29,26 +26,17 @@ public class CubeLogic : MonoBehaviour
 		yMotionStageX = yMotionStage.transform.position.x;
 		yMotionStageY = yMotionStage.transform.position.y;
         yMotionStageZ = yMotionStage.transform.position.z;
-        //ResetCube();
 	}
-
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag == "Goal")
         {
-            isInContact = true;
+            GameEvents.current.TriggerCubeContactWithGoal();
             ResetCube();
         }
 	}
 
-	private void OnCollisionStay(Collision collision)
-	{
-		if (collision.gameObject.tag == "Goal")
-		{
-			isInContact = true;
-			ResetCube();
-		}
-	}
+    // Need to fix cube reset procedure in order to use in training
 	private void ResetCube()
     {
         Debug.Log("Cube hit target");
@@ -64,6 +52,7 @@ public class CubeLogic : MonoBehaviour
 			cubeLengthZ / 2 + 0.0005f,
 			UnityEngine.Random.Range(-yMotionStageLengthY/2 + cubeLengthY, yMotionStageLengthY/2 - cubeLengthY)
             );
+
         var yMotionStageCentre = new Vector3(
             yMotionStageX,
             yMotionStageY,
