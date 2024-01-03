@@ -15,6 +15,7 @@ public class GameEvents : MonoBehaviour
 	{
 		if (OnCubeContactWithGoal != null)
 		{
+			Debug.Log("Cube contact with goal");
 			OnCubeContactWithGoal();
 		}
 	}

@@ -7,25 +7,22 @@ public class CubeLogic : MonoBehaviour
     public bool isInContact;
     [HideInInspector]
     public Collider cubeCollider;
+    public bool TriggerResetCube;
 
-    private float yMotionStageX;
-    private float yMotionStageY;
-    private float yMotionStageZ;
+    private float yMotionStagePos;
     private float yMotionStageLengthX = 0.3f;
     private float yMotionStageLengthY = 0.18f;
-    private float yMotionStageLengthZ = 0.015f;
     private float cubeLengthX = 0.025f;
     private float cubeLengthY = 0.025f;
     private float cubeLengthZ = 0.025f;
     private GameObject yMotionStage;
+    private Rigidbody cubeRB;
 
 	private void Start()
 	{
-        isInContact = false;
         yMotionStage = GameObject.Find("YMotion");
-		yMotionStageX = yMotionStage.transform.position.x;
-		yMotionStageY = yMotionStage.transform.position.y;
-        yMotionStageZ = yMotionStage.transform.position.z;
+        cubeRB = GetComponent<Rigidbody>();
+        ResetCube();
 	}
 	private void OnCollisionEnter(Collision collision)
 	{
@@ -36,29 +33,28 @@ public class CubeLogic : MonoBehaviour
         }
 	}
 
-    // Need to fix cube reset procedure in order to use in training
+	private void Update()
+	{
+		if (TriggerResetCube)
+        {
+            TriggerResetCube = false;
+            ResetCube();
+        }
+	}
+
+	// Need to fix cube reset procedure in order to use in training
 	private void ResetCube()
     {
-        Debug.Log("Cube hit target");
-		// Set the XY position to random position across the stage
-		isInContact = false;
-
-		yMotionStageX = yMotionStage.transform.localPosition.x;
-		yMotionStageY = yMotionStage.transform.localPosition.y;
-		yMotionStageZ = yMotionStage.transform.localPosition.z;
-
-		var adjustPosition = new Vector3(
+        yMotionStagePos = yMotionStage.transform.position.z;
+		var randomPositionAcrossStage = new Vector3(
             UnityEngine.Random.Range(-yMotionStageLengthX/2 + cubeLengthX, yMotionStageLengthX/2 - cubeLengthX),
-			cubeLengthZ / 2 + 0.0005f,
-			UnityEngine.Random.Range(-yMotionStageLengthY/2 + cubeLengthY, yMotionStageLengthY/2 - cubeLengthY)
-            );
+			UnityEngine.Random.Range(-yMotionStageLengthY/2 + cubeLengthY, yMotionStageLengthY/2 - cubeLengthY) - yMotionStagePos,
+			cubeLengthZ / 2 + 0.0001f
+		);
 
-        var yMotionStageCentre = new Vector3(
-            yMotionStageX,
-            yMotionStageY,
-            yMotionStageZ
-            );
-
-        this.transform.position = yMotionStageCentre + adjustPosition; 
+        cubeRB.velocity = new Vector3(0f, 0f, 0f);
+        cubeRB.angularVelocity = new Vector3(0f, 0f, 0f);
+        this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+		this.transform.localPosition = randomPositionAcrossStage; 
     }
 }

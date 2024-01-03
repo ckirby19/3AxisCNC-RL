@@ -2,22 +2,58 @@
     "CNC_Cube_Pushing_Behaviour": {
         "checkpoints": [
             {
-                "steps": 24704,
-                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-24704.onnx",
-                "reward": null,
-                "creation_time": 1702845537.780415,
+                "steps": 999928,
+                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-999928.onnx",
+                "reward": -4.995000243186951,
+                "creation_time": 1704251307.3098764,
                 "auxillary_file_paths": [
-                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-24704.pt"
+                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-999928.pt"
+                ]
+            },
+            {
+                "steps": 1499928,
+                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-1499928.onnx",
+                "reward": -4.995000243186951,
+                "creation_time": 1704257535.4077919,
+                "auxillary_file_paths": [
+                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-1499928.pt"
+                ]
+            },
+            {
+                "steps": 1999928,
+                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-1999928.onnx",
+                "reward": -4.995000243186951,
+                "creation_time": 1704263814.9523053,
+                "auxillary_file_paths": [
+                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-1999928.pt"
+                ]
+            },
+            {
+                "steps": 2499928,
+                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-2499928.onnx",
+                "reward": -4.995000243186951,
+                "creation_time": 1704270040.5319963,
+                "auxillary_file_paths": [
+                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-2499928.pt"
+                ]
+            },
+            {
+                "steps": 2527600,
+                "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-2527600.onnx",
+                "reward": -4.995000243186951,
+                "creation_time": 1704270393.2672882,
+                "auxillary_file_paths": [
+                    "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-2527600.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 24704,
+            "steps": 2527600,
             "file_path": "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour.onnx",
-            "reward": null,
-            "creation_time": 1702845537.780415,
+            "reward": -4.995000243186951,
+            "creation_time": 1704270393.2672882,
             "auxillary_file_paths": [
-                "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-24704.pt"
+                "results\\cnc_cube_push_off_01\\CNC_Cube_Pushing_Behaviour\\CNC_Cube_Pushing_Behaviour-2527600.pt"
             ]
         }
     },

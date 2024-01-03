@@ -19,7 +19,7 @@ public class CNCMotionAgent : Agent
 	public bool trainingMode;
 
 	[Tooltip("Maximum force that motors can apply to move each axis")]
-	public float moveForce = 0.2f;
+	public float moveForce = 0.1f;
 
 	[Tooltip("XY acceleration (mm/sec^2)")]
 	public float xyAcceleration = 240;
@@ -57,6 +57,12 @@ public class CNCMotionAgent : Agent
 
 	private System.Random random = new System.Random();
 
+	// Reward based on current distance and min distance between cube and endeffector
+	private float curDistanceBetweenCubeAndStick;
+	private float minDistanceBetweenCubeAndStick;
+	// Negative reward over time
+	private float timeBasedRewardDecrement = 0.005f;
+
 	private void Start()
 	{
 		contactStickTransform = this.transform.Find("Test Stick/Test_Stick");
@@ -75,8 +81,27 @@ public class CNCMotionAgent : Agent
 		GameEvents.current.OnCubeContactWithGoal += CubeHitGoal;
 
 	}
-	public override void Initialize()
+
+	public override void OnEpisodeBegin()
 	{
+		base.OnEpisodeBegin();
+		curDistanceBetweenCubeAndStick = Vector3.Distance(contactStickTransform.position, Cube.transform.position);
+		minDistanceBetweenCubeAndStick = curDistanceBetweenCubeAndStick;
+	}
+
+	public void FixedUpdate()
+	{
+		if (trainingMode)
+		{
+			AddReward(-timeBasedRewardDecrement);
+
+			curDistanceBetweenCubeAndStick = Vector3.Distance(contactStickTransform.position, Cube.transform.position);
+			if (curDistanceBetweenCubeAndStick < minDistanceBetweenCubeAndStick) {
+				AddReward(10*(curDistanceBetweenCubeAndStick - minDistanceBetweenCubeAndStick));
+				minDistanceBetweenCubeAndStick = curDistanceBetweenCubeAndStick;
+			}
+		}
+		
 	}
 
 	// Reward logic
@@ -88,7 +113,7 @@ public class CNCMotionAgent : Agent
 		{
 			if (other.tag == "Cube")
 			{
-				AddReward(0.01f);
+				AddReward(0.1f);
 			}
 			else if (other.tag == "AreasToAvoid")
 			{
@@ -101,7 +126,10 @@ public class CNCMotionAgent : Agent
 	{
 		if (trainingMode)
 		{
-			AddReward(1f);
+			Debug.Log("Cube hit goal!");
+			AddReward(2f);
+			curDistanceBetweenCubeAndStick = Vector3.Distance(contactStickTransform.position, Cube.transform.position);
+			minDistanceBetweenCubeAndStick = curDistanceBetweenCubeAndStick;
 		}
 	}
 
