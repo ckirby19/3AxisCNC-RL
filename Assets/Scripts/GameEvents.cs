@@ -11,12 +11,19 @@ public class GameEvents : MonoBehaviour
 	}
 
 	public event Action OnCubeContactWithGoal;
+	public event Action OnCubeContactWithEndEffector;
 	public void TriggerCubeContactWithGoal()
 	{
 		if (OnCubeContactWithGoal != null)
 		{
-			Debug.Log("Cube contact with goal");
 			OnCubeContactWithGoal();
+		}
+	}
+	public void TriggerCubeContactWithEndEffector()
+	{
+		if (OnCubeContactWithEndEffector != null)
+		{
+			OnCubeContactWithEndEffector();
 		}
 	}
 }
