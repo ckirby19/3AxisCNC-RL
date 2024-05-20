@@ -12,9 +12,9 @@ public class CubeLogic : MonoBehaviour
 	private float yMotionStagePos;
     private float yMotionStageLengthX = 0.3f; //300mm
     private float yMotionStageLengthY = 0.18f;
-    private float cubeLengthX = 0.025f; //50mm
-    private float cubeLengthY = 0.025f;
-    private float cubeLengthZ = 0.025f;
+    private float cubeLengthX = 0.04f; //50mm
+    private float cubeLengthY = 0.04f;
+    private float cubeLengthZ = 0.04f;
     private Transform yMotionStage;
     private Rigidbody cubeRB;
 
@@ -48,7 +48,6 @@ private void OnCollisionEnter(Collision collision)
         }
 	}
 
-	// Need to fix cube reset procedure in order to use in training
 	private void ResetCube()
     {
         yMotionStagePos = yMotionStage.transform.position.z;

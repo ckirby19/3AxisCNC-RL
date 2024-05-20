@@ -1,0 +1,65 @@
+{
+    "CNC_Cube_Touching_Behaviour": {
+        "checkpoints": [
+            {
+                "steps": 1999990,
+                "file_path": "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-1999990.onnx",
+                "reward": 10.327725307066359,
+                "creation_time": 1714076140.4640894,
+                "auxillary_file_paths": [
+                    "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-1999990.pt"
+                ]
+            },
+            {
+                "steps": 2499954,
+                "file_path": "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-2499954.onnx",
+                "reward": null,
+                "creation_time": 1714077402.4668567,
+                "auxillary_file_paths": [
+                    "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-2499954.pt"
+                ]
+            },
+            {
+                "steps": 2999973,
+                "file_path": "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-2999973.onnx",
+                "reward": 10.098888629012638,
+                "creation_time": 1714078648.5110638,
+                "auxillary_file_paths": [
+                    "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-2999973.pt"
+                ]
+            },
+            {
+                "steps": 3499974,
+                "file_path": "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-3499974.onnx",
+                "reward": 8.37906654994521,
+                "creation_time": 1714079905.31913,
+                "auxillary_file_paths": [
+                    "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-3499974.pt"
+                ]
+            },
+            {
+                "steps": 3656586,
+                "file_path": "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-3656586.onnx",
+                "reward": 9.03399981599715,
+                "creation_time": 1714080322.2673323,
+                "auxillary_file_paths": [
+                    "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-3656586.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 3656586,
+            "file_path": "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour.onnx",
+            "reward": 9.03399981599715,
+            "creation_time": 1714080322.2673323,
+            "auxillary_file_paths": [
+                "results\\2DMotionOnly2\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-3656586.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

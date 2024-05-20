@@ -202,12 +202,9 @@ public class CNCMotionAgent : Agent
 	/// <param name="actions"></param>
 	public override void OnActionReceived(ActionBuffers actions)
 	{
-		// int leftRight = actions.DiscreteActions[0];
-		// int forwardBackward = actions.DiscreteActions[1];
-		// int upDown = actions.DiscreteActions[2];
 		xRigidBody.AddForce(Vector3.right * Mathf.Clamp(actions.ContinuousActions[0],-1f,1f) * moveForce);
 		yRigidBody.AddForce(Vector3.forward * Mathf.Clamp(actions.ContinuousActions[1],-1f,1f) * moveForce);
-		zRigidBody.AddForce(Vector3.up * Mathf.Clamp(actions.ContinuousActions[2],-1f,1f) * moveForce);
+		//zRigidBody.AddForce(Vector3.up * Mathf.Clamp(actions.ContinuousActions[2],-1f,1f) * moveForce);
 	}
 
 	/// <summary>
