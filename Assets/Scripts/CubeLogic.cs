@@ -9,7 +9,6 @@ public class CubeLogic : MonoBehaviour
 	[Tooltip("Reset cube position without restarting episode")]
 	public bool TriggerResetCube;
 
-	private float yMotionStagePos;
     private float yMotionStageLengthX = 0.3f; //300mm
     private float yMotionStageLengthY = 0.18f;
     private float cubeLengthX = 0.04f; //50mm
@@ -50,12 +49,10 @@ private void OnCollisionEnter(Collision collision)
 
 	private void ResetCube()
     {
-        yMotionStagePos = yMotionStage.transform.position.z;
-
 		var randomPositionAcrossStage = new Vector3(
             UnityEngine.Random.Range((-yMotionStageLengthX + cubeLengthX) / 2f, (yMotionStageLengthX - cubeLengthX) / 2f),
 			0.02f,
-			UnityEngine.Random.Range((-yMotionStageLengthY + cubeLengthY) / 2f, (yMotionStageLengthY - cubeLengthY) / 2f) + yMotionStagePos
+            0
 		);
 
         cubeRB.velocity = new Vector3(0f, 0f, 0f);

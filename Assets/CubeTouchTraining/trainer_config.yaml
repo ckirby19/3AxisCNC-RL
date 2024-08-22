@@ -2,31 +2,31 @@ behaviors:
   CNC_Cube_Touching_Behaviour:
     trainer_type: ppo
     hyperparameters:
-      batch_size: 2048 
-      buffer_size: 20480 
-      learning_rate: 0.001
-      beta: 0.0075
+      batch_size: 1024 
+      buffer_size: 10240
+      learning_rate: 0.0001
+      beta: 0.001
       epsilon: 0.2
       lambd: 0.95
       num_epoch: 3
       learning_rate_schedule: linear
-      shared_critic: true
+      shared_critic: false
     network_settings:
       normalize: false
-      hidden_units: 256
+      hidden_units: 128
       num_layers: 2
       vis_encode_type: simple
     reward_signals:
       extrinsic:
-        gamma: 0.8
+        gamma: 0.9
         strength: 1.0
       curiosity:
-        strength: 0.1
-        gamma: 0.8
+        strength: 0.01
+        gamma: 0.9
         encoding_size: 256
     keep_checkpoints: 5
     checkpoint_interval: 500000
-    max_steps: 5000000
+    max_steps: 500000
     time_horizon: 64
     summary_freq: 10000
     threaded: false

@@ -1,0 +1,47 @@
+{
+    "CNC_Cube_Touching_Behaviour": {
+        "checkpoints": [
+            {
+                "steps": 499956,
+                "file_path": "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-499956.onnx",
+                "reward": 2.943520801141858,
+                "creation_time": 1724273769.7518218,
+                "auxillary_file_paths": [
+                    "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-499956.pt"
+                ]
+            },
+            {
+                "steps": 999982,
+                "file_path": "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-999982.onnx",
+                "reward": 2.6349566903468724,
+                "creation_time": 1724275214.1581714,
+                "auxillary_file_paths": [
+                    "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-999982.pt"
+                ]
+            },
+            {
+                "steps": 1373808,
+                "file_path": "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-1373808.onnx",
+                "reward": 2.7513437385981283,
+                "creation_time": 1724362346.5300975,
+                "auxillary_file_paths": [
+                    "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-1373808.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1373808,
+            "file_path": "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour.onnx",
+            "reward": 2.7513437385981283,
+            "creation_time": 1724362346.5300975,
+            "auxillary_file_paths": [
+                "results\\1DMotionOnly\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-1373808.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

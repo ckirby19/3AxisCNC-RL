@@ -68,6 +68,11 @@ public class CNCMotionAgent : Agent
 
 	// Negative reward over time
 	private float timeBasedRewardDecrement = 0.001f;
+
+	/// <summary>
+	/// Number of times touched cube this episode
+	/// </summary>
+	public float NumberOfTimesTouched { get; private set; }
 	private void Start()
 	{
 		base.Awake();
@@ -95,32 +100,25 @@ public class CNCMotionAgent : Agent
 	{
 		base.OnEpisodeBegin();
 		Debug.Log("Starting episode");
+		NumberOfTimesTouched = 0;
 		endEffectorPosition = capsule.center + contactStickRigidBody.transform.position;
 		disVector = endEffectorPosition - Cube.transform.position;
 		xDistance = Mathf.Abs(disVector.x);
-		yDistance = Mathf.Abs(disVector.y);
-		zDistance = Mathf.Abs(disVector.z);
 
 		minXDistance = xDistance;
-		minYDistance = yDistance;
-		minZDistance = zDistance;
 	}
 
 	public override void CollectObservations(VectorSensor sensor)
 	{
 		base.CollectObservations(sensor);
-		// 3 observations - x, y and z distance
+		// 1 observations - x distance
 		endEffectorPosition = capsule.center + contactStickRigidBody.transform.position;
 		disVector = endEffectorPosition - Cube.transform.position;
 		xDistance = Mathf.Abs(disVector.x);
-		yDistance = Mathf.Abs(disVector.y);
-		zDistance = Mathf.Abs(disVector.z);
 
-		sensor.AddObservation(xDistance);
-		sensor.AddObservation(yDistance);
-		sensor.AddObservation(zDistance);
+		sensor.AddObservation(xDistance); // 1 observation
 
-		if (trainingMode) CheckDistanceReward();
+		//if (trainingMode) CheckDistanceReward();
 	}
 
 	public void CheckDistanceReward()
@@ -129,16 +127,6 @@ public class CNCMotionAgent : Agent
 		{
 			AddReward(0.1f);
 			minXDistance = xDistance;
-		}
-		if (yDistance < minYDistance)
-		{
-			AddReward(0.1f);
-			minYDistance = yDistance;
-		}
-		if (zDistance < minZDistance)
-		{
-			AddReward(0.1f);
-			minZDistance = zDistance;
 		}
 	}
 	public void FixedUpdate()
@@ -175,13 +163,11 @@ public class CNCMotionAgent : Agent
 	//}
 	private void CubeHitEndEffector()
 	{
-		Debug.Log($"Cube hit end effector, current reward is {GetCumulativeReward()}");
+		NumberOfTimesTouched += 1;
+		Debug.Log($"Cube hit end effector {NumberOfTimesTouched} times, current reward is {GetCumulativeReward()}");
 		if (trainingMode)
 		{
-			//AddReward(0.05f);
-			AddReward(1f);
-			Debug.Log($"Ending episode, final reward is {GetCumulativeReward()}");
-			EndEpisode();
+			AddReward(NumberOfTimesTouched);
 		}
 	}
 
@@ -203,7 +189,7 @@ public class CNCMotionAgent : Agent
 	public override void OnActionReceived(ActionBuffers actions)
 	{
 		xRigidBody.AddForce(Vector3.right * Mathf.Clamp(actions.ContinuousActions[0],-1f,1f) * moveForce);
-		yRigidBody.AddForce(Vector3.forward * Mathf.Clamp(actions.ContinuousActions[1],-1f,1f) * moveForce);
+		//yRigidBody.AddForce(Vector3.forward * Mathf.Clamp(actions.ContinuousActions[1],-1f,1f) * moveForce);
 		//zRigidBody.AddForce(Vector3.up * Mathf.Clamp(actions.ContinuousActions[2],-1f,1f) * moveForce);
 	}
 
@@ -220,21 +206,21 @@ public class CNCMotionAgent : Agent
 		int yMotion = 0;
 		int zMotion = 0;
 
-		if (Input.GetKey(KeyCode.W)) yMotion = -1;
-		else if (Input.GetKey(KeyCode.S)) yMotion = 1;
-		else yMotion = 0;
+		//if (Input.GetKey(KeyCode.W)) yMotion = -1;
+		//else if (Input.GetKey(KeyCode.S)) yMotion = 1;
+		//else yMotion = 0;
 
 		if (Input.GetKey(KeyCode.A)) xMotion = 1;
 		else if (Input.GetKey(KeyCode.D)) xMotion = -1;
 		else xMotion = 0;
 
-		if (Input.GetKey(KeyCode.E)) zMotion = 1;
-		else if (Input.GetKey(KeyCode.F)) zMotion = -1;
-		else zMotion = 0;
+		//if (Input.GetKey(KeyCode.E)) zMotion = 1;
+		//else if (Input.GetKey(KeyCode.F)) zMotion = -1;
+		//else zMotion = 0;
 
 		var continActionsOut = actionsOut.ContinuousActions;
 		continActionsOut[0] = xMotion;
-		continActionsOut[1] = yMotion;
-		continActionsOut[2] = zMotion;
+		//continActionsOut[1] = yMotion;
+		//continActionsOut[2] = zMotion;
 	}
 }
