@@ -667,6 +667,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4923547027125943611, guid: 450bad7c50f1f634b8a675c460acc500, type: 3}
+      propertyPath: moveForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923547027125943611, guid: 450bad7c50f1f634b8a675c460acc500, type: 3}
       propertyPath: trainingMode
       value: 1
       objectReference: {fileID: 0}

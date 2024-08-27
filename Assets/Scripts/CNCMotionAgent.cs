@@ -91,7 +91,7 @@ public class CNCMotionAgent : Agent
 
 		Cube = this.transform.parent.Find("TestCube/Test_Cube");
 
-		//GameEvents.current.OnCubeContactWithGoal += CubeHitGoal;
+		GameEvents.current.OnCubeContactWithGoal += CubeHitGoal;
 		GameEvents.current.OnCubeContactWithEndEffector += CubeHitEndEffector;
 
 	}
@@ -118,24 +118,26 @@ public class CNCMotionAgent : Agent
 
 		sensor.AddObservation(xDistance); // 1 observation
 
-		//if (trainingMode) CheckDistanceReward();
 	}
 
 	public void CheckDistanceReward()
 	{
-		if (xDistance < minXDistance)
+		// Moving towards
+		if (xDistance <= minXDistance)
 		{
-			AddReward(0.1f);
+			AddReward(0.01f);
+			minXDistance = xDistance;
+		}
+		// moving away
+		else
+		{
+			AddReward(-0.001f);
 			minXDistance = xDistance;
 		}
 	}
 	public void FixedUpdate()
 	{
-		if (trainingMode)
-		{
-			AddReward(-timeBasedRewardDecrement);
-		}
-
+		if (trainingMode) CheckDistanceReward();
 	}
 
 	void OnDrawGizmos(){
@@ -146,28 +148,26 @@ public class CNCMotionAgent : Agent
 		}
 	}
 
-	// Reward logic
-	// On entering contact with cube?
-	// On knocking cube off the stage
-
-	//private void CubeHitGoal()
-	//{
-	//	Debug.Log("Cube hit goal!");
-	//	if (trainingMode)
-	//	{
-			
-	//		//AddReward(1f);
-	//		//Debug.Log($"Ending episode, final reward is {GetCumulativeReward()}");
-	//		//EndEpisode();
-	//	}
-	//}
+	private void CubeHitGoal()
+	{
+		Debug.Log($"Cube hit goal in stage {this.transform.parent.name}!");
+		if (trainingMode)
+		{
+			AddReward(10f);
+			Debug.Log($"Ending episode, final reward is {GetCumulativeReward()}");
+			EndEpisode();
+		}
+	}
 	private void CubeHitEndEffector()
 	{
 		NumberOfTimesTouched += 1;
-		Debug.Log($"Cube hit end effector {NumberOfTimesTouched} times, current reward is {GetCumulativeReward()}");
+		Debug.Log($"Cube hit end effector in stage {this.transform.parent.name} " +
+			$"{NumberOfTimesTouched} times, " +
+			$"current reward is {GetCumulativeReward()} " +
+			$"in episode {this.CompletedEpisodes}");
 		if (trainingMode)
 		{
-			AddReward(NumberOfTimesTouched);
+			AddReward(0.1f);
 		}
 	}
 

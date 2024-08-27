@@ -1651,7 +1651,7 @@ MonoBehaviour:
   MaxStep: 2000
   trainingMode: 1
   debugMode: 1
-  moveForce: 1
+  moveForce: 0.3
 --- !u!114 &9172785692547898484
 MonoBehaviour:
   m_ObjectHideFlags: 0
