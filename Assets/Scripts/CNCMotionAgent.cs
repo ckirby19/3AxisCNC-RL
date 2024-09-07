@@ -72,7 +72,7 @@ public class CNCMotionAgent : Agent
 	/// <summary>
 	/// Number of times touched cube this episode
 	/// </summary>
-	public float NumberOfTimesTouched { get; private set; }
+	public int NumberOfTimesTouched { get; private set; }
 	private void Start()
 	{
 		base.Awake();
@@ -101,23 +101,16 @@ public class CNCMotionAgent : Agent
 		base.OnEpisodeBegin();
 		Debug.Log("Starting episode");
 		NumberOfTimesTouched = 0;
-		endEffectorPosition = capsule.center + contactStickRigidBody.transform.position;
-		disVector = endEffectorPosition - Cube.transform.position;
-		xDistance = Mathf.Abs(disVector.x);
+		UpdateDistance();
 
 		minXDistance = xDistance;
 	}
 
-	public override void CollectObservations(VectorSensor sensor)
+	public void UpdateDistance()
 	{
-		base.CollectObservations(sensor);
-		// 1 observations - x distance
 		endEffectorPosition = capsule.center + contactStickRigidBody.transform.position;
 		disVector = endEffectorPosition - Cube.transform.position;
 		xDistance = Mathf.Abs(disVector.x);
-
-		sensor.AddObservation(xDistance); // 1 observation
-
 	}
 
 	public void CheckDistanceReward()
@@ -131,12 +124,15 @@ public class CNCMotionAgent : Agent
 		// moving away
 		else
 		{
-			AddReward(-0.001f);
-			minXDistance = xDistance;
+			if (this.transform.parent.name != "TrainingArea") 
+				{ Debug.Log($"Moving away in stage {this.transform.parent.name}!"); }
+			AddReward(-0.005f);
 		}
 	}
 	public void FixedUpdate()
 	{
+		UpdateDistance();
+
 		if (trainingMode) CheckDistanceReward();
 	}
 
@@ -150,11 +146,10 @@ public class CNCMotionAgent : Agent
 
 	private void CubeHitGoal()
 	{
-		Debug.Log($"Cube hit goal in stage {this.transform.parent.name}!");
 		if (trainingMode)
 		{
 			AddReward(10f);
-			Debug.Log($"Ending episode, final reward is {GetCumulativeReward()}");
+			Debug.Log($"Cube hit goal in stage {this.transform.parent.name}! Ending episode, final reward is {GetCumulativeReward()}");
 			EndEpisode();
 		}
 	}
@@ -170,12 +165,6 @@ public class CNCMotionAgent : Agent
 			AddReward(0.1f);
 		}
 	}
-
-	// Cannot use this as the collider is on a child, not on this element so this is never triggered
-	//private void OnCollisionEnter(Collision collision)
-	//{
-	//	if (collision.collider.tag == "Cube") CubeHitEndEffector();
-	//}
 
 	/// <summary>
 	/// Called when action is received from player or NN

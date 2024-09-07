@@ -1,0 +1,38 @@
+{
+    "CNC_Cube_Touching_Behaviour": {
+        "checkpoints": [
+            {
+                "steps": 499870,
+                "file_path": "results\\1DMotion-rayObs-with-knockoff-reward\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-499870.onnx",
+                "reward": 7.550226977377227,
+                "creation_time": 1725747791.1482058,
+                "auxillary_file_paths": [
+                    "results\\1DMotion-rayObs-with-knockoff-reward\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-499870.pt"
+                ]
+            },
+            {
+                "steps": 501150,
+                "file_path": "results\\1DMotion-rayObs-with-knockoff-reward\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-501150.onnx",
+                "reward": 7.550226977377227,
+                "creation_time": 1725747791.2335591,
+                "auxillary_file_paths": [
+                    "results\\1DMotion-rayObs-with-knockoff-reward\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-501150.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 501150,
+            "file_path": "results\\1DMotion-rayObs-with-knockoff-reward\\CNC_Cube_Touching_Behaviour.onnx",
+            "reward": 7.550226977377227,
+            "creation_time": 1725747791.2335591,
+            "auxillary_file_paths": [
+                "results\\1DMotion-rayObs-with-knockoff-reward\\CNC_Cube_Touching_Behaviour\\CNC_Cube_Touching_Behaviour-501150.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "1.13.1+cu117"
+    }
+}

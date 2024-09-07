@@ -43,7 +43,7 @@ private void OnCollisionEnter(Collision collision)
         else if (collision.gameObject.tag == "EndEffector")
         {
             GameEvents.current.TriggerCubeContactWithEndEffector();
-            ResetCube();
+            // ResetCube();
         }
 	}
 
@@ -52,7 +52,7 @@ private void OnCollisionEnter(Collision collision)
 		var randomPositionAcrossStage = new Vector3(
             UnityEngine.Random.Range((-yMotionStageLengthX + cubeLengthX) / 2f, (yMotionStageLengthX - cubeLengthX) / 2f),
 			0.02f,
-            0
+			-0.04f
 		);
 
         cubeRB.velocity = new Vector3(0f, 0f, 0f);
