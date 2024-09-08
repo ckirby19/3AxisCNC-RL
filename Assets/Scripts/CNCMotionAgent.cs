@@ -150,8 +150,9 @@ public class CNCMotionAgent : Agent
 		{
 			AddReward(10f);
 			Debug.Log($"Cube hit goal in stage {this.transform.parent.name}! Ending episode, final reward is {GetCumulativeReward()}");
-			EndEpisode();
 		}
+		EndEpisode();
+
 	}
 	private void CubeHitEndEffector()
 	{

@@ -653,7 +653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SensorName: RayPerceptionSensor
-  m_DetectableTags: []
+  m_DetectableTags:
+  - Cube
   m_RaysPerDirection: 2
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
@@ -1638,9 +1639,9 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: d9da9da8605274b41a2330351e6d99d7, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: CNC_Cube_Touching_Behaviour
   TeamId: 0
   m_UseChildSensors: 1
@@ -1678,9 +1679,9 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 2000
-  trainingMode: 1
+  trainingMode: 0
   debugMode: 1
-  moveForce: 0.3
+  moveForce: 1.2
 --- !u!114 &9172785692547898484
 MonoBehaviour:
   m_ObjectHideFlags: 0
